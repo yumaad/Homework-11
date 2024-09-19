@@ -61,16 +61,16 @@ public class Main {
     // метод для вычисления сроков доставки
     public static int calculateDeliveryTime(int deliveryDistance) {
         int deliveryTerm = 0;
-        if (deliveryDistance <= 0 || deliveryDistance >= 100) {
-            deliveryTerm = -1;
-        } else if (deliveryDistance <= 20) {
-            deliveryTerm += 1;
+        if (deliveryDistance > 0 && deliveryDistance <= 20) {
+            deliveryTerm = 1;
         } else if (deliveryDistance <= 60) {
-            deliveryTerm += 2;
-        } else {
-            deliveryTerm += 3;
+            deliveryTerm = 2;
+        } else if (deliveryDistance <= 100){
+            deliveryTerm = 3;
         }
-
+        else {
+            deliveryTerm = -1;
+        }
         return deliveryTerm;
     }
 }
