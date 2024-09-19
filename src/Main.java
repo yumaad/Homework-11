@@ -13,27 +13,24 @@ public class Main {
         selectVersion(clientOS, clientDeviceYear);
 
         // task #3
-        int deliveryDistance = 95;
+        int deliveryDistance = 150;
         int deliveryTime = calculateDeliveryTime(deliveryDistance);
         if (deliveryTime == -1) {
-            System.out.println("Свыше 100 км доставки нет.");
-        }
-        else {
+            System.out.println("На данное расстояние доставки нет, введите расстояние от 0 до 100 км");
+        } else {
             System.out.println("Потребуется дней: " + deliveryTime);
         }
-
     }
 
     // метод для проверки является ли год високосным
     public static void checkYear(int year) {
-        if (year >= 1584){
+        if (year >= 1584) {
             if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
                 System.out.println(year + " год является високосным\n");
             } else {
                 System.out.println(year + " год не является високосным\n");
             }
-        }
-        else {
+        } else {
             System.out.println("Введите, пожалуйста, другой год за 1584 годом\n");
         }
     }
@@ -45,16 +42,16 @@ public class Main {
             case 0:
                 if (clientDeviceYear < currentYear) {
                     System.out.println("Установите облегченную версию приложения для iOS по ссылке\n");
-                    break;
+                } else {
+                    System.out.println("Установите версию приложения для iOS по ссылке\n");
                 }
-                System.out.println("Установите версию приложения для iOS по ссылке\n");
                 break;
             case 1:
                 if (clientDeviceYear < currentYear) {
                     System.out.println("Установите облегченную версию приложения для Android по ссылке\n");
-                    break;
+                } else {
+                    System.out.println("Установите версию приложения для Android по ссылке\n");
                 }
-                System.out.println("Установите версию приложения для Android по ссылке\n");
                 break;
             default:
                 System.out.println("Версии приложения для такой операционный системы нет\n");
@@ -63,17 +60,17 @@ public class Main {
 
     // метод для вычисления сроков доставки
     public static int calculateDeliveryTime(int deliveryDistance) {
-        int deliveryTerm = 1;
-        if (deliveryDistance <= 20) {
-            return deliveryTerm;
-        } else if (deliveryDistance <= 60) {
+        int deliveryTerm = 0;
+        if (deliveryDistance <= 0 || deliveryDistance >= 100) {
+            deliveryTerm = -1;
+        } else if (deliveryDistance <= 20) {
             deliveryTerm += 1;
-            return deliveryTerm;
-        } else if (deliveryDistance <= 100) {
+        } else if (deliveryDistance <= 60) {
             deliveryTerm += 2;
-            return deliveryTerm;
         } else {
-            return -1;
+            deliveryTerm += 3;
         }
+
+        return deliveryTerm;
     }
 }
